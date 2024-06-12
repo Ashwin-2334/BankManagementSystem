@@ -26,7 +26,7 @@ public class Login extends JFrame {
         JLabel label = new JLabel(i3);
         // this is used for putting the img to the view
 
-        label.setBounds(70,10,150,150);
+        label.setBounds(130,10,150,150);
         // Specifing the location where it has to put in the view
 
         add(label);
@@ -36,8 +36,47 @@ public class Login extends JFrame {
         //Adding Welcome text to View
         JLabel text = new JLabel("Welcome To ATM");
         text.setFont(new Font("Osward", Font.BOLD, 36));
-        text.setBounds(215,70,500,40);
+        text.setBounds(285,70,500,40);
         add(text);
+
+
+        JLabel card_No = new JLabel("CARD NUMBER:");
+        card_No.setFont(new Font("SansSerif", Font.BOLD, 26));
+        card_No.setBounds(175,180,500,40);
+        add(card_No);
+
+        JTextField cardNoTextField = new JTextField();
+        cardNoTextField.setBounds(390, 190, 240, 25);
+        add(cardNoTextField);
+
+        JLabel pin = new JLabel("PIN NUMBER:");
+        pin.setFont(new Font("SansSerif", Font.BOLD, 26));
+        pin.setBounds(175,230,500,40);
+        add(pin);
+
+        JTextField pinTextField = new JTextField();
+        pinTextField.setBounds(390, 240, 240, 25);
+        add(pinTextField);
+
+        JButton login = new JButton("SIGN IN");
+        login.setBounds(390, 290, 100, 30);
+        login.setBackground(Color.BLACK);
+        login.setForeground(Color.WHITE);
+        add(login);
+
+        JButton clear = new JButton("CLEAR");
+        clear.setBounds(530, 290, 100, 30);
+        clear.setBackground(Color.BLACK);
+        clear.setForeground(Color.WHITE);
+        add(clear);
+        
+        JButton signup = new JButton("SIGN UP");
+        signup.setBounds(455, 350, 100, 30);
+        signup.setBackground(Color.BLACK);
+        signup.setForeground(Color.WHITE);
+        add(signup);
+
+        
 
 
 
