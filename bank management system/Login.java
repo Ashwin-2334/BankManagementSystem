@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -8,7 +10,12 @@ import javax.swing.*;
 
 //import java.awt.*;
 
-public class Login extends JFrame {
+public class Login extends JFrame implements ActionListener {
+
+    JButton login,signup,clear;
+    JTextField cardNoTextField;
+    JPasswordField pinTextField;
+
 
     Login() //Constructor
     {
@@ -39,43 +46,53 @@ public class Login extends JFrame {
         text.setBounds(285,70,500,40);
         add(text);
 
-
+        //Adding Card_No text to View
         JLabel card_No = new JLabel("CARD NUMBER:");
         card_No.setFont(new Font("SansSerif", Font.BOLD, 26));
         card_No.setBounds(175,180,500,40);
         add(card_No);
 
-        JTextField cardNoTextField = new JTextField();
+        //Adding Card Field to View
+        cardNoTextField = new JTextField();
         cardNoTextField.setBounds(390, 190, 240, 25);
+        cardNoTextField.setFont(new Font("Arial", Font.BOLD,16));
         add(cardNoTextField);
 
+        //Adding Pin text to View
         JLabel pin = new JLabel("PIN NUMBER:");
         pin.setFont(new Font("SansSerif", Font.BOLD, 26));
         pin.setBounds(175,230,500,40);
         add(pin);
 
-        JTextField pinTextField = new JTextField();
+        //Adding Pin Field to View
+        pinTextField = new JPasswordField();
         pinTextField.setBounds(390, 240, 240, 25);
+        pinTextField.setFont(new Font("Arial", Font.BOLD,14));
         add(pinTextField);
 
-        JButton login = new JButton("SIGN IN");
+        //Adding SignUp button to View
+        login = new JButton("SIGN IN");
         login.setBounds(390, 290, 100, 30);
         login.setBackground(Color.BLACK);
         login.setForeground(Color.WHITE);
+        login.addActionListener(this);
         add(login);
 
-        JButton clear = new JButton("CLEAR");
+        //Adding Clear button to view
+        clear = new JButton("CLEAR");
         clear.setBounds(530, 290, 100, 30);
         clear.setBackground(Color.BLACK);
         clear.setForeground(Color.WHITE);
+        clear.addActionListener(this);
         add(clear);
-        
-        JButton signup = new JButton("SIGN UP");
+
+        //Adding Signup button to view
+        signup = new JButton("SIGN UP");
         signup.setBounds(455, 350, 100, 30);
         signup.setBackground(Color.BLACK);
         signup.setForeground(Color.WHITE);
+        signup.addActionListener(this);
         add(signup);
-
         
 
 
@@ -90,7 +107,29 @@ public class Login extends JFrame {
 
     }
 
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+         
+        if(ae.getSource() == clear)
+        {
+            cardNoTextField.setText(null);
+            pinTextField.setText(null);
+        }
+        else if(ae.getSource() == login)
+        {
+
+        }
+        else if(ae.getSource() == signup)
+        {
+
+        }
+        
+       
+    }    
+   
+
     public static void main(String[] args) {
         new Login();
-    }    
+    }
+
 }
