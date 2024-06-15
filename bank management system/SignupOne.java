@@ -99,7 +99,7 @@ public class SignupOne extends JFrame implements ActionListener {
         next.addActionListener(this);
         add(next);
 
-
+        setTitle("SIGN UP FORM PAGE-1");
         setSize(850,800);
         setLocation(350,10);
         setVisible(true);
