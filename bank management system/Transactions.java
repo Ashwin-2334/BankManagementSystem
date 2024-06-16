@@ -29,6 +29,7 @@ public class Transactions extends JFrame implements ActionListener{
         deposit = new JButton("DEPOSIT");
         deposit.setBounds(160, 368, 160, 28);
         deposit.setFont(new Font("System", Font.BOLD,14));
+        deposit.addActionListener(this);
         image.add(deposit);
 
         withdrawal = new JButton("WITHDRAWAL");
@@ -74,6 +75,11 @@ public class Transactions extends JFrame implements ActionListener{
         if(ae.getSource() == exit)
         {
             System.exit(0);
+        }
+        else if(ae.getSource() == deposit)
+        {
+            setVisible(false);
+            new Deposit(pinnumber).setVisible(true);
         }
 
      }
