@@ -72,7 +72,7 @@ public class SignupThree extends JFrame implements ActionListener {
            try
             {
                 Conn C = new Conn();
-                String query1 = "insert into signupthree values('"+formno+"', '"+cardnumber+"', '"+pinnumber+"')";
+                String query1 = "insert into login values('"+formno+"', '"+cardnumber+"', '"+pinnumber+"')";
                 C.s.executeUpdate(query1);
                 setVisible(false);
             }

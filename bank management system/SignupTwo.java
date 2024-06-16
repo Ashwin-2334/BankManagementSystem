@@ -65,11 +65,11 @@ public class SignupTwo extends JFrame implements ActionListener {
 
         
 
-        next = new JButton("Next");
+        next = new JButton("FINISH");
         next.setBackground(Color.BLACK);
         next.setForeground(Color.WHITE);
         next.setFont(new Font("Raleway", Font.BOLD,14));
-        next.setBounds(560,450,80,30);
+        next.setBounds(560,450,100,30);
         next.addActionListener(this);
         add(next);
 

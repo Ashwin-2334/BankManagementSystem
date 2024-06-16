@@ -3,6 +3,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
 import javax.swing.*;
 
@@ -117,7 +118,28 @@ public class Login extends JFrame implements ActionListener {
         }
         else if(ae.getSource() == login)
         {
+            Conn conn = new Conn();
+            String cardnumber = cardNoTextField.getText();
+            String pinnumber = pinTextField.getText(); //Ignore this
 
+            String query = "select * from login where card_number = '"+cardnumber+"' and pin = '"+pinnumber+"'";
+            try
+            {
+                ResultSet rs = conn.s.executeQuery(query);
+                if(rs.next())
+                {
+                    setVisible(false);
+                    new Transactions(pinnumber).setVisible(true);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Incorrect Card Number or Pin");
+                }
+
+            }
+            catch(Exception e)
+            {
+                System.out.println(e);
+            }
         }
         else if(ae.getSource() == signup)
         {
