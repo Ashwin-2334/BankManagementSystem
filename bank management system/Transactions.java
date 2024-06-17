@@ -7,11 +7,12 @@ import javax.swing.*;
 public class Transactions extends JFrame implements ActionListener{
 
     JButton deposit,withdrawal,balanceenq,pinchange,ministatement,exit;
-    String pinnumber;
+    String pinnumber,cardnumber;
 
-    Transactions(String pinnumber)
+    Transactions(String pinnumber,String cardnumber)
     {
         this.pinnumber = pinnumber;
+        this.cardnumber = cardnumber;
         setLayout(null);
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("atm.jpg"));
         Image i2 = i1.getImage().getScaledInstance(900, 900, Image.SCALE_DEFAULT);
@@ -35,6 +36,7 @@ public class Transactions extends JFrame implements ActionListener{
         withdrawal = new JButton("WITHDRAWAL");
         withdrawal.setBounds(350, 368, 160, 28);
         withdrawal.setFont(new Font("System", Font.BOLD,14));
+        withdrawal.addActionListener(this);
         image.add(withdrawal);
 
         ministatement = new JButton("MINI-STATEMENT");
@@ -66,7 +68,7 @@ public class Transactions extends JFrame implements ActionListener{
     }
 
     public static void main(String[] args) {
-        new Transactions("");
+        new Transactions("","");
     }
 
     @Override
@@ -79,8 +81,14 @@ public class Transactions extends JFrame implements ActionListener{
         else if(ae.getSource() == deposit)
         {
             setVisible(false);
-            new Deposit(pinnumber).setVisible(true);
+            new Deposit(pinnumber,cardnumber).setVisible(true);
         }
+        else if(ae.getSource() == withdrawal)
+        {
+            setVisible(false);
+            new Withdrawal(pinnumber,cardnumber).setVisible(true);
+        }
+
 
      }
     

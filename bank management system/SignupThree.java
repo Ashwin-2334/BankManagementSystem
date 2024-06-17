@@ -27,7 +27,7 @@ public class SignupThree extends JFrame implements ActionListener {
         cardNo.setBounds(110,180,450,40);
         add(cardNo);
 
-        JLabel excardNo = new JLabel(cardnumber);
+        JLabel excardNo = new JLabel(""+cardnumber.substring(0, 4)+"-"+cardnumber.substring(4, 8)+"-"+cardnumber.substring(8, 12)+"-"+cardnumber.substring(12, 16));
         excardNo.setFont(new Font("Raleway",Font.BOLD,26));
         excardNo.setBounds(350,180,450,40);
         add(excardNo);
@@ -85,7 +85,8 @@ public class SignupThree extends JFrame implements ActionListener {
 
         else if(ae.getSource() == cancel)
         {
-
+            setVisible(false);
+            new Login().setVisible(true);
         }
      }
 

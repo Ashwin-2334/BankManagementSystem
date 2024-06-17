@@ -2,15 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.Date;
+import java.sql.*;
 
-public class Deposit extends JFrame implements ActionListener{
+public class Withdrawal extends JFrame implements ActionListener{
 
     JTextField amount;
-    JButton deposit,back;
+    JButton withdraw,back;
     String cardnumber,pinnumber;
 
-    Deposit(String pinnumber,String cardnumber)
+    Withdrawal(String pinnumber,String cardnumber)
     {
         this.pinnumber = pinnumber;
         this.cardnumber = cardnumber;
@@ -22,10 +23,10 @@ public class Deposit extends JFrame implements ActionListener{
         image.setBounds(0, 0, 900, 800);
         add(image);
 
-        JLabel text = new JLabel("ENTER THE AMOUNT TO BE DEPOSITED");
+        JLabel text = new JLabel("ENTER THE AMOUNT TO BE WITHDRAWED");
         text.setForeground(Color.WHITE);
         text.setFont(new Font("System", Font.BOLD,16));
-        text.setBounds(185, 270, 400, 20);
+        text.setBounds(175, 270, 400, 20);
         image.add(text);
 
         amount = new JTextField();
@@ -33,11 +34,11 @@ public class Deposit extends JFrame implements ActionListener{
         amount.setBounds(210,310,250,25);
         image.add(amount);
 
-        deposit = new JButton("DEPOSIT");
-        deposit.setBounds(370, 440, 140, 28);
-        deposit.setFont(new Font("System", Font.BOLD,14));
-        deposit.addActionListener(this);
-        image.add(deposit);
+        withdraw = new JButton("WITHDRAW");
+        withdraw.setBounds(370, 440, 140, 28);
+        withdraw.setFont(new Font("System", Font.BOLD,14));
+        withdraw.addActionListener(this);
+        image.add(withdraw);
 
         back = new JButton("BACK");
         back.setBounds(370, 470, 140, 28);
@@ -55,13 +56,13 @@ public class Deposit extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae) {
         
-        if(ae.getSource() == deposit)
+        if(ae.getSource() == withdraw)
         {
             
 
-                String amtdeposited = amount.getText();                
+                String amtwithdrawed = amount.getText();                
                 Date date = new Date();
-                if(amtdeposited.equals(""))
+                if(amtwithdrawed.equals(""))
                 {
                     JOptionPane.showMessageDialog(null, "Please Enter the amount");
                 }
@@ -70,9 +71,28 @@ public class Deposit extends JFrame implements ActionListener{
                     try
                     {
                     Conn conn = new Conn();
-                    String query = "insert into bankstatement values('"+cardnumber+"', 'DEPOSIT', '"+amtdeposited+"', '"+date+"')";
+                    ResultSet rs = conn.s.executeQuery("select * from bankstatement where card_number = '"+cardnumber+"'");
+                    int balance = 0;
+                    while (rs.next())
+                    {
+                        if(rs.getString("transaction_type").equals("DEPOSIT"))
+                        {
+                            balance += Integer.parseInt(rs.getString("amount"));
+                        }
+                        else
+                        {
+                            balance -= Integer.parseInt(rs.getString("amount"));                            
+                        }                        
+                    }
+                    
+                    if (balance < Integer.parseInt(amtwithdrawed)) {
+                        JOptionPane.showMessageDialog(null,"Insufficient balance");
+                        return;
+                    }
+
+                    String query = "insert into bankstatement values('"+cardnumber+"', 'WITHDRAWAL', '"+amtwithdrawed+"', '"+date+"')";
                     conn.s.executeUpdate(query);
-                    JOptionPane.showMessageDialog(null, "Rs."+amtdeposited+" Deposited Successfully");
+                    JOptionPane.showMessageDialog(null, "Rs."+amtwithdrawed+" Withdrawed Successfully");
                     setVisible(false);
                     new Transactions(pinnumber, cardnumber).setVisible(true);
                 }
@@ -90,7 +110,7 @@ public class Deposit extends JFrame implements ActionListener{
         
     }
     public static void main(String[] args) {
-        new Deposit("","");
+        new Withdrawal("","");
     }
     
 }
