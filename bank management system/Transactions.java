@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class Transactions extends JFrame implements ActionListener{
 
-    JButton deposit,withdrawal,balanceenq,pinchange,ministatement,exit;
+    JButton deposit,withdrawal,balanceenquiry,pinchange,ministatement,exit;
     String pinnumber,cardnumber;
 
     Transactions(String pinnumber,String cardnumber)
@@ -44,14 +44,16 @@ public class Transactions extends JFrame implements ActionListener{
         ministatement.setFont(new Font("System", Font.BOLD,14));
         image.add(ministatement);
         
-        balanceenq = new JButton("BALANCE");
-        balanceenq.setBounds(350, 400, 160, 28);
-        balanceenq.setFont(new Font("System", Font.BOLD,14));
-        image.add(balanceenq);
+        balanceenquiry = new JButton("BALANCE");
+        balanceenquiry.setBounds(350, 400, 160, 28);
+        balanceenquiry.setFont(new Font("System", Font.BOLD,14));
+        balanceenquiry.addActionListener(this);
+        image.add(balanceenquiry);
         
         pinchange = new JButton("CHANGE PIN");
         pinchange.setBounds(160, 430, 160, 28);
         pinchange.setFont(new Font("System", Font.BOLD,14));
+        pinchange.addActionListener(this);
         image.add(pinchange);
 
         exit = new JButton("EXIT");
@@ -87,6 +89,16 @@ public class Transactions extends JFrame implements ActionListener{
         {
             setVisible(false);
             new Withdrawal(pinnumber,cardnumber).setVisible(true);
+        }
+        else if(ae.getSource() == pinchange)
+        {
+            setVisible(false);
+            new Pinchange(cardnumber,pinnumber).setVisible(true);
+        }
+        else if(ae.getSource() == balanceenquiry)
+        {
+            setVisible(false);
+            new Balanceenq(cardnumber, pinnumber);
         }
 
 
