@@ -42,6 +42,7 @@ public class Transactions extends JFrame implements ActionListener{
         ministatement = new JButton("MINI-STATEMENT");
         ministatement.setBounds(160, 400, 160, 28);
         ministatement.setFont(new Font("System", Font.BOLD,14));
+        ministatement.addActionListener(this);
         image.add(ministatement);
         
         balanceenquiry = new JButton("BALANCE");
@@ -100,7 +101,11 @@ public class Transactions extends JFrame implements ActionListener{
             setVisible(false);
             new Balanceenq(cardnumber, pinnumber);
         }
-
+        else if(ae.getSource() == ministatement)
+        {
+            //setVisible(false);
+            new Ministatement(cardnumber, pinnumber);
+        }
 
      }
     
