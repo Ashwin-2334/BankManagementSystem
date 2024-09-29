@@ -35,7 +35,7 @@ public class SignupTwo extends JFrame implements ActionListener {
         eduquali.setBounds(100,200,250,30);
         add(eduquali);
 
-        String educationalValues[] = {"12th Pass","Under-Graduate","Post-graduate","Others"};
+        String educationalValues[] = {"12th pass","Under-graduate","Post-graduate","Others"};
         
         education = new JComboBox(educationalValues);
         education.setBackground(Color.WHITE);
